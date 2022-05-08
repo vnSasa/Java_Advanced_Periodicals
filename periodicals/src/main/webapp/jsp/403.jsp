@@ -8,6 +8,7 @@
 </head>
 <body>
 	<div>
+		
 		<div>
 				<h3> You have no permission to access page!</h3>
 		</div>
@@ -19,4 +20,3 @@
 	</div>
 </body>
 </html>
-© 2022 GitHub, Inc.

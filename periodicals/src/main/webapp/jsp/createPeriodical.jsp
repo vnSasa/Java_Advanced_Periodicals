@@ -20,7 +20,6 @@
 				periodical</a> <a href="#" class="w3-bar-item w3-button">Bucket</a>
 		</div>
 
-
 		<!-- Page Content -->
 		<div style="margin-left: 10%">
 			<div class="w3-container w3-teal">
@@ -37,9 +36,6 @@
 							onclick="document.forms['logoutForm'].submit()">Logout</a>
 					</h2>
 				</c:if>
-
-
-
 
 				<form:form method="POST" action="${contextPath}/addPeriodical" modelAttribute="periodical">
 					<table>
@@ -63,11 +59,9 @@
 						value="${_csrf.token}" />
 				</form:form>
 
-
 			</div>
 
 		</div>
-
 
 	</div>
 	<!-- /container -->
@@ -76,4 +70,4 @@
 	<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 
 </body>
-</html> 
+</html>
