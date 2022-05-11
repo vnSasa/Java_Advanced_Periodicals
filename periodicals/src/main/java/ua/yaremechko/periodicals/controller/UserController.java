@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import ua.yaremechko.periodicals.domain.Periodical;
 import ua.yaremechko.periodicals.domain.User;
 import ua.yaremechko.periodicals.service.PeriodicalsService;
 import ua.yaremechko.periodicals.service.UserService;
@@ -60,8 +59,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/create-periodical", method = RequestMethod.GET)
-	public ModelAndView createPeriodical() {
-		return new ModelAndView("createPeriodical", "periodical", new Periodical());
+	public String createPeriodical() {
+    	return "createPeriodical";
 	}
 
 }
