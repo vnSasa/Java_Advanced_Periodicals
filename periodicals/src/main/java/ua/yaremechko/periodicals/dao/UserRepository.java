@@ -8,6 +8,6 @@ import ua.yaremechko.periodicals.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-	Optional<User> findByEmail(String email);
+	public Optional<User> findByEmail(String email);
 
 }
