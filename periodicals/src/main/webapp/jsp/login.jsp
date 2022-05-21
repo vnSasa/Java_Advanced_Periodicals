@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -17,9 +19,27 @@
     <title>Log in with your account</title>
 
     <link type="text/css"  href="login.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link 
+    	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    	rel="stylesheet" id="bootstrap-css">
+	<script 
+		src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script 
+		src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script 
+		type="text/javascript">
+	$(document).ready(function() {
+		var selItem = localStorage.getItem("locales");
+		$('#locales').val(selItem ? selItem : 'en');
+		$("#locales").change(function() {
+			var selectedOption = $('#locales').val();
+			if (selectedOption) {
+				window.location.replace('?lang=' + selectedOption);
+				localStorage.setItem("locales", selectedOption);
+			}
+		});
+	});
+	</script>
 </head>
 
 <body>
@@ -30,24 +50,39 @@
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="https://cdn-icons-png.flaticon.com/512/295/295128.png" id="icon" alt="Login icon" />
+      <img src="https://cdn-icons-png.flaticon.com/512/295/295128.png" 
+      		id="icon" alt="Login icon" />
     </div>
 
       <form method="POST" action="${contextPath}/login" class="form-signin">
-        <h2 class="form-heading">PERIODICALS</h2>
+        <h2 class="form-heading"><spring:message code="login.title"/></h2>
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span>${message}</span>
-            <input name="email" type="text" placeholder="Email" class="fadeIn second" 
+            	<input name="email" type="text" 
+            	placeholder="<spring:message code='login.email'/>" class="fadeIn second" 
                    autofocus="true"/>
-            <input name="password" type="password" placeholder="Password" class="fadeIn third "/>
+            	<input name="password" type="password" 
+            	placeholder="<spring:message code='login.password'/>" class="fadeIn third "/>
+            
             <span>${error}</span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-            <input class="fadeIn fourth" type="submit" value="Log In"/>
+            <input class="fadeIn fourth" type="submit" value="<spring:message code='login.signin'/>"/>
         </div>
 
     </form>
+    
+    <div>
+				<fieldset>
+					<label><spring:message code="login.choose_language" /></label> <select
+						id="locales">
+						<option value="en"><spring:message code='login.english'/></option>
+						<option value="ua"><spring:message code='login.ukrainian'/></option>
+
+					</select>
+				</fieldset>
+			</div>
     
     <!-- Remind Passowrd -->
     <div id="formFooter">
