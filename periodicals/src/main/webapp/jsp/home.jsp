@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -9,7 +11,7 @@
 <html lang="en">
 <head>
 
-<title>Periodicals</title>
+<title><spring:message code='login.title'/></title>
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
@@ -17,6 +19,20 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var selItem = localStorage.getItem("locales");
+		$('#locales').val(selItem ? selItem : 'en');
+		$("#locales").change(function() {
+			var selectedOption = $('#locales').val();
+			if (selectedOption) {
+				window.location.replace('?lang=' + selectedOption);
+				localStorage.setItem("locales", selectedOption);
+			}
+		});
+	});
+</script>
 
 </head>
 <body>
@@ -29,24 +45,24 @@
 
 			<div class="list-group-item active">
 					<div>
-						<h3>PERIODICALS</h3>
+						<h3><spring:message code='login.title'/></h3>
 					</div>
 					<div>${pageContext.request.userPrincipal.name}</div>
 				</div>
 
 				<a href="/home" class="list-group-item"> <i
-					class="fa fa-comment-o"></i> Home
+					class="fa fa-comment-o"></i> <spring:message code='sidebar.home'/>
 				</a>
 
 				<security:authorize access="hasRole('ROLE_ADMIN')">
 					<a href="/create-periodical" class="list-group-item"> <i
-						class="fa fa-search"></i> Create periodical
+						class="fa fa-search"></i> <spring:message code='sidebar.create_periodical'/>
 					</a>
 				</security:authorize>
 
 				<security:authorize access="hasRole('ROLE_USER')">
 					<a href="/buckets" class="list-group-item"> <i
-						class="fa fa-search"></i> Bucket
+						class="fa fa-search"></i> <spring:message code='sidebar.bucket'/>
 					</a>
 				</security:authorize>
 
@@ -58,7 +74,7 @@
 				
 				<a class="list-group-item"
 						onclick="document.forms['logoutForm'].submit()"
-						style="cursor: pointer"> <i class="fa fa-search"></i> Logout
+						style="cursor: pointer"> <i class="fa fa-search"></i> <spring:message code='sidebar.logout'/>
 				</a>
 				
 				</c:if>
@@ -76,7 +92,7 @@
 				<c:if test="${not empty periodicals}">
 					<c:forEach items="${periodicals}" var="currentPeriodical">
 
-						<div class="w3-card-4" style="width: 20%; margin: 2%">
+						<div class="w3-card-4" style="width: 20%; margin: 2%; float:left">
 							<img
 								src="data:image/jpg;base64, ${currentPeriodical.encodedImage}"
 								alt="Norway" style="width: 100%">
@@ -93,7 +109,7 @@
 									<input type="hidden" value="${currentPeriodical.id}"
 										class="form-control" name="periodicalId">
 									<input type="submit" class="w3-button w3-block w3-dark-grey"
-										value="+ add to bucket">
+										value="+ <spring:message code='bucket.add'/>">
 								</form:form>
 							</security:authorize>
 							
